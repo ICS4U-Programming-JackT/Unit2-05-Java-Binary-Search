@@ -35,24 +35,31 @@ public final class BinarySearch {
      * @return index or -1
      */
     public static int binarySearch(final int target, final int[] array) {
+        // Initialize high low mid and final index
         int high = array.length - 1;
         int low = 0;
         int mid = (high + low) / 2;
         int fIndex = -1;
 
-
+        //While high is bigger than or equal to low, continue
         while (high >= low) {
+            // Check proximity of mid point to target
+            // adjust low and high to reduce range
             if (target > array[mid]) {
                 low = mid + 1;
             } else if (target < array[mid]) {
                 high = mid - 1;
             }
+            //Readjust mid after changes
             mid = (high + low) / 2;
+
+            //Check if target is mid point
             if (target == array[mid]) {
                 fIndex = mid;
                 break;
             }
         }
+        // Return either -1 or target index
         return fIndex;
     }
 
@@ -85,7 +92,7 @@ public final class BinarySearch {
         System.out.println("Array: " + Arrays.toString(sorted));
         System.out.println("Enter a number to search for (or 'q' to quit)");
 
-
+        // Setup scanner
         final Scanner scanner = new Scanner(System.in);
 
 
@@ -104,8 +111,10 @@ public final class BinarySearch {
 
             // Try to parse input and search
             try {
+                // Define target as int and final position
                 final int targetInt = Integer.parseInt(targetString);
                 final int index = binarySearch(targetInt, sorted);
+                // Print if target is in array or not
                 if (index == -1) {
                     System.out.println(
                         "The number you entered is not in the array."
